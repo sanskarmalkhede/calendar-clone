@@ -19,7 +19,7 @@ export const colors = {
     900: '#1e3a8a',
     950: '#172554',
   },
-  
+
   // Semantic colors
   success: {
     50: '#f0fdf4',
@@ -34,7 +34,7 @@ export const colors = {
     900: '#14532d',
     950: '#052e16',
   },
-  
+
   error: {
     50: '#fef2f2',
     100: '#fee2e2',
@@ -48,7 +48,7 @@ export const colors = {
     900: '#7f1d1d',
     950: '#450a0a',
   },
-  
+
   warning: {
     50: '#fffbeb',
     100: '#fef3c7',
@@ -62,7 +62,7 @@ export const colors = {
     900: '#78350f',
     950: '#451a03',
   },
-  
+
   info: {
     50: '#f0f9ff',
     100: '#e0f2fe',
@@ -76,7 +76,7 @@ export const colors = {
     900: '#0c4a6e',
     950: '#082f49',
   },
-  
+
   // Neutral palette
   gray: {
     50: '#f9fafb',
@@ -91,7 +91,7 @@ export const colors = {
     900: '#111827',
     950: '#030712',
   },
-  
+
   // Dark mode specific colors
   dark: {
     bg: '#0f172a',
@@ -108,7 +108,7 @@ export const typography = {
     sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
     mono: ['JetBrains Mono', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
   },
-  
+
   fontSize: {
     xs: ['0.75rem', { lineHeight: '1rem' }],
     sm: ['0.875rem', { lineHeight: '1.25rem' }],
@@ -121,7 +121,7 @@ export const typography = {
     '5xl': ['3rem', { lineHeight: '1' }],
     '6xl': ['3.75rem', { lineHeight: '1' }],
   },
-  
+
   fontWeight: {
     thin: '100',
     extralight: '200',
@@ -260,7 +260,7 @@ export const components = {
       lg: '0.75rem 1.5rem',
     },
   },
-  
+
   input: {
     height: {
       sm: '2rem',
@@ -273,7 +273,7 @@ export const components = {
       lg: '0.75rem 1rem',
     },
   },
-  
+
   modal: {
     maxWidth: {
       sm: '24rem',
@@ -282,7 +282,7 @@ export const components = {
       xl: '64rem',
     },
   },
-  
+
   toast: {
     width: '24rem',
     maxWidth: '90vw',
