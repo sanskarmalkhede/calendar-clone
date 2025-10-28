@@ -14,6 +14,7 @@ function CalendarContent() {
     selectedDate,
     events,
     isModalOpen,
+    editingEvent,
     setCurrentDate,
     setSelectedDate,
     openModal,
@@ -57,11 +58,12 @@ function CalendarContent() {
           />
         </div>
       </div>
-      
+
       <EventModal
         isOpen={isModalOpen}
         onClose={closeModal}
         selectedDate={selectedDate}
+        event={editingEvent || undefined}
       />
     </div>
   );

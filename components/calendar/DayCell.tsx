@@ -44,9 +44,6 @@ export default function DayCell({
           "hover:bg-gray-100": !isCurrentMonth && !isToday && !hasEvents,
           "hover:bg-blue-50": isCurrentMonth && hasEvents && !isToday,
           "hover:bg-gray-200": !isCurrentMonth && hasEvents && !isToday,
-          // Special styling for days with events
-          "border-l-2 border-l-blue-400": hasEvents && isCurrentMonth,
-          "border-l-2 border-l-blue-300": hasEvents && !isCurrentMonth,
         }
       )}
       onClick={onClick}
@@ -77,83 +74,43 @@ export default function DayCell({
         {dayNumber}
       </div>
 
-      {/* Event Indicators */}
+      {/* Event List - Stacked like Google Calendar */}
       {hasEvents && (
-        <div className="mt-1 space-y-1">
-          {/* Show first few events as colored dots */}
-          <div className="flex flex-wrap gap-1">
-            {events.slice(0, 3).map((event, index) => (
-              <button
-                key={`${event.id}-${index}`}
-                className={cn(
-                  "w-2 h-2 rounded-full hover:scale-125 transition-transform cursor-pointer",
-                  event.color ? "" : "bg-blue-500"
-                )}
-                style={{
-                  backgroundColor: event.color || '#3b82f6'
-                }}
-                title={`${event.title} - Click to edit`}
-                onClick={(e) => handleEventClick(e, event)}
-                aria-label={`Edit event: ${event.title}`}
-              />
-            ))}
-          </div>
+        <div className="mt-1 space-y-1 overflow-hidden">
+          {/* Show up to 3 events as full-width bars */}
+          {events.slice(0, 3).map((event, index) => (
+            <button
+              key={`${event.id}-${index}`}
+              className={cn(
+                "text-xs truncate px-2 py-0.5 rounded w-full text-left hover:opacity-80 transition-opacity cursor-pointer font-medium",
+                event.color ? "text-white" : "text-white bg-blue-500"
+              )}
+              style={{
+                backgroundColor: event.color || '#3b82f6'
+              }}
+              title={`${event.title} - Click to edit`}
+              onClick={(e) => handleEventClick(e, event)}
+              aria-label={`Edit event: ${event.title}`}
+            >
+              {event.title}
+            </button>
+          ))}
 
-          {/* Event Count Badge for multiple events */}
+          {/* Show "+N more" indicator if there are more than 3 events */}
           {eventCount > 3 && (
-            <div className="flex justify-center">
-              <button
-                className="inline-flex items-center justify-center w-5 h-5 text-xs font-medium text-white bg-gray-600 rounded-full hover:bg-gray-700 transition-colors cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  // Open modal with first event for editing, or could show a list
-                  openModal(events[0]);
-                }}
-                title={`${eventCount} events - Click to view`}
-                aria-label={`View ${eventCount} events`}
-              >
-                +{eventCount - 3}
-              </button>
-            </div>
+            <button
+              className="text-xs text-gray-600 hover:text-gray-900 px-2 py-0.5 w-full text-left font-medium transition-colors cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                // Open modal to show all events or first event
+                openModal(events[0]);
+              }}
+              title={`View all ${eventCount} events`}
+              aria-label={`View all ${eventCount} events`}
+            >
+              +{eventCount - 3} more
+            </button>
           )}
-
-          {/* Single event count badge alternative */}
-          {eventCount > 1 && eventCount <= 3 && (
-            <div className="flex justify-end">
-              <button
-                className="inline-flex items-center justify-center w-5 h-5 text-xs font-medium text-gray-600 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  // Open modal with first event for editing
-                  openModal(events[0]);
-                }}
-                title={`${eventCount} events - Click to view`}
-                aria-label={`View ${eventCount} events`}
-              >
-                {eventCount}
-              </button>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Event Titles Preview (for single event) */}
-      {eventCount === 1 && (
-        <div className="mt-1">
-          <button
-            className={cn(
-              "text-xs truncate px-1 py-0.5 rounded w-full text-left hover:opacity-80 transition-opacity cursor-pointer",
-              events[0].color ? "text-white" : "text-white bg-blue-500"
-            )}
-            style={{
-              backgroundColor: events[0].color || '#3b82f6'
-            }}
-            title={`${events[0].title} - Click to edit`}
-            onClick={(e) => handleEventClick(e, events[0])}
-            aria-label={`Edit event: ${events[0].title}`}
-          >
-            {events[0].title}
-          </button>
         </div>
       )}
     </div>
