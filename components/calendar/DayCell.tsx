@@ -28,34 +28,14 @@ export default function DayCell({
     <div
       className={cn(
         "relative min-h-[120px] p-2 border-r border-b border-gray-200 cursor-pointer transition-colors",
-        "hover:bg-gray-50",
         {
           // Current month styling
-          "bg-white": isCurrentMonth,
+          "bg-white hover:bg-gray-50": isCurrentMonth,
           // Other month styling (grayed out)
-          "bg-gray-50 text-gray-400": !isCurrentMonth,
-          // Today highlighting
-          "bg-blue-50 border-blue-200": isToday && isCurrentMonth,
-          "bg-blue-100": isToday && !isCurrentMonth,
-          // Selected date styling
-          "ring-2 ring-blue-500 ring-inset": isSelected,
-          // Enhanced hover effects for days with events
-          "hover:bg-blue-100": isToday,
-          "hover:bg-gray-100": !isCurrentMonth && !isToday && !hasEvents,
-          "hover:bg-blue-50": isCurrentMonth && hasEvents && !isToday,
-          "hover:bg-gray-200": !isCurrentMonth && hasEvents && !isToday,
+          "bg-gray-50 text-gray-400 hover:bg-gray-100": !isCurrentMonth,
         }
       )}
       onClick={onClick}
-      role="button"
-      tabIndex={0}
-      aria-label={`${dayNumber} ${hasEvents ? `with ${eventCount} event${eventCount > 1 ? 's' : ''}` : ''}`}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onClick();
-        }
-      }}
     >
       {/* Date Number */}
       <div
@@ -82,7 +62,7 @@ export default function DayCell({
             <button
               key={`${event.id}-${index}`}
               className={cn(
-                "text-xs truncate px-2 py-0.5 rounded w-full text-left hover:opacity-80 transition-opacity cursor-pointer font-medium",
+                "text-xs truncate px-2 py-0.5 rounded w-full text-left hover:opacity-80 transition-opacity cursor-pointer font-medium outline-none",
                 event.color ? "text-white" : "text-white bg-blue-500"
               )}
               style={{
@@ -99,7 +79,7 @@ export default function DayCell({
           {/* Show "+N more" indicator if there are more than 3 events */}
           {eventCount > 3 && (
             <button
-              className="text-xs text-gray-600 hover:text-gray-900 px-2 py-0.5 w-full text-left font-medium transition-colors cursor-pointer"
+              className="text-xs text-gray-600 hover:text-gray-900 px-2 py-0.5 w-full text-left font-medium transition-colors cursor-pointer outline-none"
               onClick={(e) => {
                 e.stopPropagation();
                 // Open modal to show all events or first event
